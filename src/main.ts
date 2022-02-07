@@ -37,6 +37,8 @@ declare global {
         path2: PathStep[]
 
         spawnContainerPosition: RoomPosition
+
+        roomController: StructureController
     }
 
     interface CreepMemory {
@@ -65,14 +67,23 @@ export const loop = function () {
     }
 
     //getting the room
-    const myHardcodedRoomName = "E29N11";
+    const myHardcodedRoomName: string = "E16S42";
     const room = Game.rooms[myHardcodedRoomName]
 
     //getting the spawn
     const spawn: StructureSpawn = Game.spawns['Arnice123']
+/*
+    if (room.memory.roomController == null)
+    {
 
-    //getting the controller
-    const controller = room.controller
+    }
+    else{
+        //getting the controller
+        var controller : StructureController = room.memory.roomController
+
+    }*/
+
+    var controller : StructureController | undefined = room.controller
 
     //getting the tower
     let towers: StructureTower[] = room.find(FIND_MY_STRUCTURES, {
@@ -97,13 +108,15 @@ export const loop = function () {
     }
 
     const wt = 15
+    if (controller != undefined)
+    {
+        if (Game.time % wt == 0) {
+            if (CheckIfContainerIsNeeded(room)) {
 
-    if (Game.time % wt == 0) {
-        if (CheckIfContainerIsNeeded(room)) {
-            PlaceContainersByController(controller, room, spawn)
+                PlaceContainersByController(controller, room, spawn)
+            }
         }
     }
-
     //how often it checks to spawn in another creep'
 
     const waitingTime = 5

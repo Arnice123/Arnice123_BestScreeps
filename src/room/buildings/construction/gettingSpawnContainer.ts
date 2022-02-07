@@ -69,21 +69,17 @@ export function CheckIfContainerIsNeeded(room: Room, controller: StructureContro
 
             const tempPath = tempPos.findPathTo(spawn)
 
-            if (shortestpath == null)
+            // if this is the first iteration automatically make it the chosen one
+
+            if (shortestpath.length == null)
             {
                 shortestpath = tempPath
+                chosenPosition = tempPos
             }
 
             // if the temporary path is shorter that the previus one make it the chosen pos
 
             if (tempPath.length < shortestpath.length) {
-                shortestpath = tempPath
-                chosenPosition = tempPos
-            }
-
-            // if this is the first iteration automatically make it the chosen one
-
-            if (positions == '0') {
                 shortestpath = tempPath
                 chosenPosition = tempPos
             }
