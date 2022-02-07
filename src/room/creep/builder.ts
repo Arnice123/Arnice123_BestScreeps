@@ -18,7 +18,8 @@ export var roleBuilder = {
             creep.say('🚧 build')
         }
 
-        const constructionSite: ConstructionSite = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
+
+        const constructionSite: ConstructionSite | null = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
 
         if (creep.memory.building) {
             if (constructionSite != null) {

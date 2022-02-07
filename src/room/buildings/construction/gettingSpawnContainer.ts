@@ -51,11 +51,11 @@ export function CheckIfContainerIsNeeded(room: Room, controller: StructureContro
 
         // creating the variable for the shortest path to spawn from the availible positons
 
-        let shortestpath: PathStep[]
+        let shortestpath: PathStep[] | undefined = undefined
 
         // getting the position that will be the containers location
 
-        let chosenPosition: RoomPosition
+        let chosenPosition: RoomPosition | undefined = undefined
 
         // getting all the availible positions and finding out what position to chose
 
@@ -71,7 +71,7 @@ export function CheckIfContainerIsNeeded(room: Room, controller: StructureContro
 
             // if this is the first iteration automatically make it the chosen one
 
-            if (shortestpath.length == null)
+            if (shortestpath == undefined)
             {
                 shortestpath = tempPath
                 chosenPosition = tempPos
