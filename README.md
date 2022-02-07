@@ -1,6 +1,6 @@
-# Screeps Typescript Starter
+# Arnice123 Screeps Temporary Code
 
-Screeps Typescript Starter is a starting point for a Screeps AI written in Typescript. It provides everything you need to start writing your AI whilst leaving `main.ts` as empty as possible.
+This is my temp code for screeps I am going to make a less broken and better one soon
 
 ## Basic Usage
 
@@ -50,6 +50,8 @@ Maintaining the docs will also become a more community-focused effort, which mea
 
 To visit the docs, [click here](https://screepers.gitbook.io/screeps-typescript-starter/).
 
-## Contributing
+## Issues
 
-Issues, Pull Requests, and contribution to the docs are welcome! See our [Contributing Guidelines](CONTRIBUTING.md) for more details.
+MAKE SURE NODE IS EITHER NODE.JS 10 || 12 THAT CAN BE A PROBLEM
+Also when setting up the `screeps.json` I think you only need to change the token and branch, anything else do not touch for the main
+If you have issues message me on discord `Ar_nice123#6257`
