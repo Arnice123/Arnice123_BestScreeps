@@ -53,5 +53,6 @@ To visit the docs, [click here](https://screepers.gitbook.io/screeps-typescript-
 ## Issues
 
 MAKE SURE NODE IS EITHER NODE.JS 10 || 12 THAT CAN BE A PROBLEM
+
 Also when setting up the `screeps.json` I think you only need to change the token and branch, anything else do not touch for the main
 If you have issues message me on discord `Ar_nice123#6257`
