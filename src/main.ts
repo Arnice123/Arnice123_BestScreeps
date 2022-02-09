@@ -12,6 +12,7 @@ import { FindEmptySites } from "room/buildings/construction/RoadManager"
 import { PlaceContainersByController } from "room/buildings/construction/spawnContainerManager"
 import { CheckIfContainerIsNeeded } from "room/buildings/ContainerManager"
 import { TowerStuff } from "room/buildings/towerManager"
+import { PixelMake } from "international/pixelMarket"
 
 declare global {
     /*
@@ -155,6 +156,8 @@ export const loop = function () {
             roleRepairer.run(creep);
         }
     }
+
+    PixelMake()
 
     // This is the main loop
 }
