@@ -1,7 +1,5 @@
 /* This code is to find out how many parts a creep should have for their select role */
 
-import internal from "stream"
-
 export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
 
     // Getting the amount of creeps in the room
@@ -11,13 +9,6 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer')
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder')
     var haulers = _.filter(Game.creeps, (creep) => creep.memory.role == 'hauler')
-
-
-    // getting the energy structures
-
-    const spawnStructuresExtention: StructureExtension[] = room.find(FIND_MY_STRUCTURES, {
-        filter: { structureType: StructureExtension }
-    })
 
     // getting how much energy is available
 
@@ -33,19 +24,19 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
 
     // if the amount of creeps for each role is less than 2 spawn in a new one
 
-    if (harvesters.length < 3) {
+    if (harvesters.length < 2) {
         SpawnInHarvester(spawnEnergyAvailable)
     }
 
-    if (upgraders.length < 2) {
+    if (upgraders.length < 3) {
         SpawnInUpgrader(spawnEnergyAvailable)
     }
 
-    if (haulers.length < 2) {
+    if (haulers.length < 3) {
         SpawnInHauler(spawnEnergyAvailable)
     }
 
-    if (builders.length < 2) {
+    if (builders.length < 3) {
         SpawnInBuilder(spawnEnergyAvailable)
     }
 
@@ -80,6 +71,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         // spawning in the creep
         var newName = 'Harvester(T' + numberOfParts + ')' + Game.time
         spawn.spawnCreep(body, newName, { memory: { role: 'harvester' } })
+        console.log('Spawning new: ' + newName)
     }
 
     function SpawnInUpgrader(energy: number) {
@@ -98,7 +90,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
 
         var energytogive = energy - 300
 
-        while (energytogive > 0) {
+        while (energytogive > 49) {
             if (energytogive >= 100) {
                 body.extraParts.push(WORK)
                 body.tier += 1
@@ -141,11 +133,12 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         //spawing in Upgrader
         var newName = 'Upgrader(T' + body.tier + ')' + Game.time
         spawn.spawnCreep(newBody, newName, { memory: { role: 'upgrader' } })
+        console.log('Spawning new: ' + newName)
         return
     }
 
     function SpawnInBuilder(energy: number) {
-        if (energy < 300) {
+        if (energy < 400) {
             return
         }
 
@@ -157,7 +150,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
 
         var energytogive = energy - 300
 
-        while (energytogive > 0) {
+        while (energytogive > 49) {
             if (energytogive >= 100) {
                 body.extraParts.push(WORK)
                 body.tier += 1
@@ -200,6 +193,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         //spawing in Upgrader
         var newName = 'Builder(T' + body.tier + ')' + Game.time
         spawn.spawnCreep(newBody, newName, { memory: { role: 'builder' } })
+        console.log('Spawning new: ' + newName)
         return
     }
 
@@ -220,11 +214,13 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
 
         var newName = 'Hauler(T' + (numberOfParts + 3) + ')' + Game.time
         spawn.spawnCreep(body, newName, { memory: { role: 'hauler' } })
+        console.log('Spawning new: ' + newName)
+        return
     }
 
     function SpawnInRepairer(energy: number) {
 
-        if (energy < 300) {
+        if (energy < 400) {
             return
         }
 
@@ -235,9 +231,9 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
             tier: 0
         }
 
-        var energytogive = energy - 300
+        var energytogive = energy - 400
 
-        while (energytogive > 0) {
+        while (energytogive > 49) {
             if (energytogive >= 100) {
                 body.extraParts.push(WORK)
                 body.tier += 1

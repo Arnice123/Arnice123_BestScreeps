@@ -13,13 +13,16 @@ export var roleHarvester = {
 
         const closestSource = creep.pos.findClosestByRange(sources)
 
+        if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
+        creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
+/*
         var containers : StructureContainer[] = creep.room.find(FIND_STRUCTURES, {
             filter: { structureType: STRUCTURE_CONTAINER }
         })
 
-        const closestContainer: StructureContainer = creep.pos.findClosestByPath(containers)
+        const closestContainer: StructureContainer = creep.pos.findClosestByPath(containers)*/
 
-        if (!closestContainer) {
+/*        if (!closestContainer) {
             if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
                 creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
             return
@@ -30,7 +33,7 @@ export var roleHarvester = {
             return
         }
 
-        creep.moveTo(closestContainer, { visualizePathStyle: { stroke: '#ffaa00' } })
+        creep.moveTo(closestContainer, { visualizePathStyle: { stroke: '#ffaa00' } })*/
 
     }
 };

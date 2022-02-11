@@ -40,7 +40,7 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
     let i = 0
     for (var position in path1) {
         i++
-        if (i == path1.length - 1) {
+        if (i == path1.length -1) {
             const placeConstructionSiteResult20 = room.createConstructionSite(path1[position].x, path1[position].y, STRUCTURE_CONTAINER)
             console.log(placeConstructionSiteResult20)
             continue

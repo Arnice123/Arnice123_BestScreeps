@@ -47,46 +47,47 @@ export function PlaceContainersByController(controller: StructureController, roo
 
     const AllPosiblePossitions: Position[] = findPositionsInsideRect(rect)
 
-    // creating the variable for the shortest path to spawn from the availible positons
+        // creating the variable for the shortest path to spawn from the availible positons
 
-    let shortestpath: PathStep[]
+        let shortestpath: PathStep[] | undefined = undefined
 
-    // getting the position that will be the containers location
+        // getting the position that will be the containers location
 
-    let chosenPosition: RoomPosition
+        let chosenPosition: RoomPosition | undefined = undefined
 
-    // getting all the availible positions and finding out what position to chose
+        // getting all the availible positions and finding out what position to chose
 
-    for (var positions in AllPosiblePossitions) {
+        for (var positions in AllPosiblePossitions) {
 
-        // creating a room position with the given pos
+            // creating a room position with the given pos
 
-        const tempPos = new RoomPosition(AllPosiblePossitions[positions].x, AllPosiblePossitions[positions].y, room.name)
+            const tempPos = new RoomPosition(AllPosiblePossitions[positions].x, AllPosiblePossitions[positions].y, room.name)
 
-        // creating a path to the spawn to find out the shortest route
+            // creating a path to the spawn to find out the shortest route
 
-        const tempPath = tempPos.findPathTo(spawn)
+            const tempPath = tempPos.findPathTo(spawn)
 
-        // if the temporary path is shorter that the previus one make it the chosen pos
+            // if this is the first iteration automatically make it the chosen one
 
-        if (tempPath.length < shortestpath.length) {
-            shortestpath = tempPath
-            chosenPosition = tempPos
+            if (shortestpath == undefined)
+            {
+                shortestpath = tempPath
+                chosenPosition = tempPos
+            }
+
+            // if the temporary path is shorter that the previus one make it the chosen pos
+
+            if (tempPath.length < shortestpath.length) {
+                shortestpath = tempPath
+                chosenPosition = tempPos
+            }
         }
-
-        // if this is the first iteration automatically make it the chosen one
-
-        if (positions == '0') {
-            shortestpath = tempPath
-            chosenPosition = tempPos
-        }
-    }
 
     // place the container
 
     const placeContainerSiteResult = room.createConstructionSite(chosenPosition, STRUCTURE_CONTAINER)
     console.log(placeContainerSiteResult)
-    
+
 
     room.memory.spawnContainerPosition = chosenPosition
 

@@ -73,16 +73,8 @@ export const loop = function () {
 
     //getting the spawn
     const spawn: StructureSpawn = Game.spawns['Arnice123']
-/*
-    if (room.memory.roomController == null)
-    {
 
-    }
-    else{
-        //getting the controller
-        var controller : StructureController = room.memory.roomController
-
-    }*/
+    SpawnInCreep(room, spawn)
 
     var controller : StructureController | undefined = room.controller
 

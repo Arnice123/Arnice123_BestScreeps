@@ -8,13 +8,11 @@
     "baseUrl": "src/",
     "sourceMap": true,
     "strict": true,
-    "noImplicitAny": true,
-    "removeComments": true,
+    "experimentalDecorators": true,
     "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
-    "strictNullChecks": false,
-    "esModuleInterop": true,
+    "strictNullChecks": false
   },
   "exclude": [
     "node_modules"

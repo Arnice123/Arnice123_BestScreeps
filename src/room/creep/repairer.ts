@@ -28,7 +28,7 @@ export var roleRepairer = {
                 filter: (structure) => (structure.hits < 10000 && structure.structureType == STRUCTURE_WALL)
             })
 
-            if (damagedRamparts.length > 0) {
+            if (damagedRamparts != null && damagedWalls == null) {
                 const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
 
                 if (closestDamagedStructure) {
@@ -37,7 +37,7 @@ export var roleRepairer = {
                     }
                 }
             }
-            else {
+            else if (damagedWalls != null && damagedRamparts == null) {
                 const closestDamagedStructure = creep.pos.findClosestByRange(damagedWalls)
 
                 if (closestDamagedStructure) {
@@ -45,6 +45,30 @@ export var roleRepairer = {
                         creep.moveTo(closestDamagedStructure, { reusePath: 50 })
                     }
                 }
+            }
+            else if (damagedWalls != null && damagedRamparts != null) {
+                const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
+
+                if (closestDamagedStructure) {
+                    if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closestDamagedStructure, { reusePath: 50 })
+                    }
+                }
+            }
+            else{
+                const constructionSite: ConstructionSite | null = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
+
+                if (constructionSite != null) {
+                    if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(constructionSite, { visualizePathStyle: { stroke: '#ffffff' } })
+                    }
+                }
+                else{
+                    if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
+                    }
+                }
+
             }
         }
         else {

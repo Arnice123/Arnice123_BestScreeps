@@ -63,6 +63,42 @@ export var roleHauler = {
 
 
             }
+            else{
+                var targets = creep.room.find(FIND_MY_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
+                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                });
+
+                const towers: StructureTower[] = creep.room.find(FIND_MY_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_TOWER) &&
+                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                })
+
+                var lowEnergyTowers: StructureTower
+
+                for (var tower in towers) {
+                    if (towers[tower].store.energy <= 75) {
+                        lowEnergyTowers = towers[tower]
+                    }
+                }
+
+                if (lowEnergyTowers != null) {
+                    if (creep.transfer(lowEnergyTowers, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(lowEnergyTowers, { visualizePathStyle: { stroke: '#ffaa00' } });
+                    }
+                }
+
+                if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+
+                    // Move to it
+
+                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+                }
+            }
 
 
 
