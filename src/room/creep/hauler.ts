@@ -90,6 +90,7 @@ export var roleHauler = {
                     if (creep.transfer(lowEnergyTowers, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(lowEnergyTowers, { visualizePathStyle: { stroke: '#ffaa00' } });
                     }
+                    return
                 }
 
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

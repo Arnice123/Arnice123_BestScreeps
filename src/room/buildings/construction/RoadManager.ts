@@ -15,7 +15,7 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
         var path1 = spawn.pos.findPathTo(Game.flags.SOURCE1.pos)
         var path2 = spawn.pos.findPathTo(Game.flags.SOURCE2.pos)
         room.memory.path1 = path1
-        room.memory.path1 = path2
+        room.memory.path2 = path2
     }
     else {
         var path1 = room.memory.path1

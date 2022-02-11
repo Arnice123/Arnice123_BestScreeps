@@ -28,7 +28,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         SpawnInHarvester(spawnEnergyAvailable)
     }
 
-    if (upgraders.length < 3) {
+    if (upgraders.length < 4) {
         SpawnInUpgrader(spawnEnergyAvailable)
     }
 
@@ -43,6 +43,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
     if (repairers.length < 2) {
         SpawnInRepairer(spawnEnergyAvailable)
     }
+    
 
     // function to spawn in harvesters
 
