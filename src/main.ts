@@ -1,18 +1,9 @@
 // These are global type declarations
 
-import { roleBuilder } from "room/creep/builder"
-import { ManageTheBuilder } from "room/creep/creepManagers/builderManager"
-import { roleHarvester } from "room/creep/harvester"
-import { roleHauler } from "room/creep/hauler"
-import { roleRepairer } from "room/creep/repairer"
-import { SpawnInCreep } from "room/creep/spawning/spawningRequest"
-import { roleUpgrader } from "room/creep/upgrader"
-import { filter } from "lodash"
-import { FindEmptySites } from "room/buildings/construction/RoadManager"
-import { PlaceContainersByController } from "room/buildings/construction/spawnContainerManager"
-import { CheckIfContainerIsNeeded } from "room/buildings/ContainerManager"
-import { TowerStuff } from "room/buildings/towerManager"
+
 import { PixelMake } from "international/pixelMarket"
+import { roomFuctions } from "room/roomManager"
+
 
 declare global {
     /*
@@ -60,90 +51,8 @@ declare global {
 }
 
 export const loop = function () {
-    for (var name in Memory.creeps) {
-        if (!Game.creeps[name]) {
-            delete Memory.creeps[name]
-            console.log('Clearing non-existing creep memory:', name)
-        }
-    }
 
-    //getting the room
-    const myHardcodedRoomName: string = "E14S41";
-    const room = Game.rooms[myHardcodedRoomName]
-
-    //getting the spawn
-    const spawn: StructureSpawn = Game.spawns['Arnice123']
-
-    SpawnInCreep(room, spawn)
-
-    var controller : StructureController | undefined = room.controller
-
-    //getting the tower
-    let towers: StructureTower[] = room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType == STRUCTURE_TOWER);
-        }
-    });
-
-    for (var tower in towers) {
-        TowerStuff(room, towers[tower])
-    }
-
-
-    //how often FindEmptySites runs
-
-    const waitTime = 50
-
-    // If the remainder of dividing the current game time by some value is 0, then its been some amount of ticks
-
-    if (Game.time % waitTime == 0) {
-        FindEmptySites(room, spawn)
-    }
-
-    const wt = 15
-    if (controller != undefined)
-    {
-        if (Game.time % wt == 0) {
-            if (CheckIfContainerIsNeeded(room)) {
-
-                PlaceContainersByController(controller, room, spawn)
-            }
-        }
-    }
-    //how often it checks to spawn in another creep'
-
-
-    SpawnInCreep
-
-
-    // displaying what type of creep is spawning
-    if (Game.spawns['Arnice123'].spawning) {
-        var spawningCreep = Game.creeps[Game.spawns['Arnice123'].spawning.name];
-        Game.spawns['Arnice123'].room.visual.text(
-            '🛠️' + spawningCreep.memory.role,
-            Game.spawns['Arnice123'].pos.x + 1,
-            Game.spawns['Arnice123'].pos.y,
-            { align: 'left', opacity: 0.8 });
-    }
-
-    for (var name in Game.creeps) {
-        var creep = Game.creeps[name];
-        if (creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        }
-        if (creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        if (creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
-        if (creep.memory.role == 'hauler') {
-            roleHauler.run(creep);
-        }
-        if (creep.memory.role == 'repairer') {
-            roleRepairer.run(creep);
-        }
-    }
+    roomFuctions()
 
     PixelMake()
 
