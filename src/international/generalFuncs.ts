@@ -16,7 +16,21 @@ generalFuncs.findEnergy = function findEnergy(creep) {
         filter: (structure) => { structure.structureType == STRUCTURE_CONTAINER && structure.id != creep.room.memory.spawnContainerID }
     })
 
-    if (droppedEnergy.length == 0 && containers.length == 0) { return }
+    if (droppedEnergy.length == 0 && containers.length == 0) {
+        for (var name in Game.creeps) {
+            var creep = Game.creeps[name];
+            if (creep.memory.role == 'harvester') {
+                return
+            }
+        }
+
+        var sources = creep.room.find(FIND_SOURCES)
+
+        const closestSource = creep.pos.findClosestByRange(sources)
+
+        if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
+        creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
+     }
 
 
     const closestdroppedEnergy = creep.pos.findClosestByRange(droppedEnergy)
