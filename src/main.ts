@@ -68,7 +68,7 @@ export const loop = function () {
     }
 
     //getting the room
-    const myHardcodedRoomName: string = "E16S42";
+    const myHardcodedRoomName: string = "E14S41";
     const room = Game.rooms[myHardcodedRoomName]
 
     //getting the spawn
@@ -112,13 +112,9 @@ export const loop = function () {
     }
     //how often it checks to spawn in another creep'
 
-    const waitingTime = 5
 
-    // If the remainder of dividing the current game time by some value is 0, then its been some amount of ticks
+    SpawnInCreep
 
-    if (Game.time % waitingTime == 0) {
-        SpawnInCreep
-    }
 
     // displaying what type of creep is spawning
     if (Game.spawns['Arnice123'].spawning) {
