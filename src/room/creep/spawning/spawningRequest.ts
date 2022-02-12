@@ -9,6 +9,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer')
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder')
     var haulers = _.filter(Game.creeps, (creep) => creep.memory.role == 'hauler')
+    let constructionSites = room.find(FIND_CONSTRUCTION_SITES);
 
     // getting how much energy is available
 
@@ -36,14 +37,14 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         SpawnInHauler(spawnEnergyAvailable)
     }
 
-    if (builders.length < 3) {
+    if (constructionSites != null && builders.length < 3) {
         SpawnInBuilder(spawnEnergyAvailable)
     }
 
     if (repairers.length < 2) {
         SpawnInRepairer(spawnEnergyAvailable)
     }
-    
+
 
     // function to spawn in harvesters
 
@@ -139,7 +140,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
     }
 
     function SpawnInBuilder(energy: number) {
-        if (energy < 400) {
+        if (energy < 300) {
             return
         }
 

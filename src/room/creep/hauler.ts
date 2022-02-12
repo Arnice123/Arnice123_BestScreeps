@@ -92,6 +92,7 @@ export var roleHauler = {
                     }
                     return
                 }
+                
 
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 
