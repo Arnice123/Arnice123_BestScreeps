@@ -28,6 +28,21 @@ export var roleRepairer = {
                 filter: (structure) => (structure.hits < 10000 && structure.structureType == STRUCTURE_WALL)
             })
 
+            const damagedContainers = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => (structure.hits < 25000 && structure.structureType == STRUCTURE_CONTAINER)
+            })
+
+            if (damagedContainers != null)
+            {
+                const closestDamagedStructure = creep.pos.findClosestByRange(damagedContainers)
+
+                if (closestDamagedStructure) {
+                    if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closestDamagedStructure, { reusePath: 50 })
+                    }
+                }
+                return
+            }
 
             if (damagedRamparts != null) {
                 const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
@@ -40,7 +55,7 @@ export var roleRepairer = {
                 return
             }
 
-            if (damagedWalls != null && damagedRamparts != null) {
+            if (damagedWalls != null && damagedRamparts != null && damagedContainers != null) {
                 const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
 
                 if (closestDamagedStructure) {
@@ -62,7 +77,7 @@ export var roleRepairer = {
                 return
             }
 
-            if (damagedWalls == null && damagedRamparts == null)
+            if (damagedWalls == null && damagedRamparts == null && damagedContainers == null)
             {
                 const constructionSite: ConstructionSite | null = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
 

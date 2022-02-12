@@ -7,6 +7,8 @@ interface GeneralFuncs {
 
 export const generalFuncs: Partial<GeneralFuncs> = {}
 
+// this function will find the closest energy in the area in either a container or dropped energy
+
 generalFuncs.findEnergy = function findEnergy(creep) {
     const droppedEnergy = creep.room.find(FIND_DROPPED_RESOURCES, {
         filter: resource => resource.resourceType == RESOURCE_ENERGY
