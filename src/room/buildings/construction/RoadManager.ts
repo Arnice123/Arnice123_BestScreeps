@@ -9,18 +9,29 @@ import { Position } from "source-map";
 
 export function FindEmptySites(room: Room, spawn: StructureSpawn) {
 
-    //creating an instance of the room
+    // if there isn't a path to the sources make one
 
     if (room.memory.path1 == null && room.memory.path2 == null) {
+
+        // new path
+
         var path1 = spawn.pos.findPathTo(Game.flags.SOURCE1.pos)
         var path2 = spawn.pos.findPathTo(Game.flags.SOURCE2.pos)
+
+        // adding to memory
+
         room.memory.path1 = path1
         room.memory.path2 = path2
     }
     else {
+
+        // if there is in memory make create it
+
         var path1 = room.memory.path1
         var path2 = room.memory.path2
     }
+
+    // construction sites
 
     const constructSitesLength = spawn.room.find(FIND_MY_STRUCTURES, {
         filter: { structureType: FIND_MY_CONSTRUCTION_SITES }
@@ -28,23 +39,38 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
 
     //if there are to many construction sites dont try
 
-    if (constructSitesLength.length >= 100) {
-        return
-    }
+    if (constructSitesLength.length == 100) { return }
 
     // Getting the room terrain
 
     var terrain = room.getTerrain()
 
-    // for each position in the path there should be a road
+    // used for placing container
     let i = 0
+
+    // for each position in the path there should be a road
+
     for (var position in path1) {
+
+        // increasing i
+
         i++
+
+        // if this is the end of the path place a container
+
         if (i == path1.length -1) {
-            const placeConstructionSiteResult20 = room.createConstructionSite(path1[position].x, path1[position].y, STRUCTURE_CONTAINER)
-            console.log(placeConstructionSiteResult20)
+
+            // place container one the position
+
+            const placeConstructionSiteResult = room.createConstructionSite(path1[position].x, path1[position].y, STRUCTURE_CONTAINER)
+
+            // log in case I want to debug
+
+            console.log(placeConstructionSiteResult)
             continue
         }
+
+        // making a path
 
         switch (terrain.get(path1[position].x, path1[position].y)) {
 
@@ -54,7 +80,7 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
 
                 const placeConstructionSiteResult11 = room.createConstructionSite(path1[position].x, path1[position].y, STRUCTURE_ROAD)
 
-                console.log(placeConstructionSiteResult11) // returns 0 or -7
+                console.log(placeConstructionSiteResult11)
                 break
 
             case 0:
@@ -65,23 +91,34 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
 
         }
     }
+
     i = 0
     //same thing as previous
+
     for (var position in path2) {
+
         i++
+
         if (i == path2.length - 1) {
+
             const placeConstructionSiteResult20 = room.createConstructionSite(path2[position].x, path2[position].y, STRUCTURE_CONTAINER)
+
             console.log(placeConstructionSiteResult20)
             continue
         }
 
         switch (terrain.get(path2[position].x, path2[position].y)) {
+
             case TERRAIN_MASK_SWAMP:
+
                 const placeConstructionSiteResult21 = room.createConstructionSite(path2[position].x, path2[position].y, STRUCTURE_ROAD)
+
                 console.log(placeConstructionSiteResult21)
                 break
             case 0:
+
                 const placeConstructionSiteResult22 = room.createConstructionSite(path2[position].x, path2[position].y, STRUCTURE_ROAD)
+
                 console.log(placeConstructionSiteResult22)
                 break
 

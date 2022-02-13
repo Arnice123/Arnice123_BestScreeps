@@ -103,15 +103,26 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
     if (closestContainer != null && closestdroppedEnergy != null)
     {
+
+        // create a path to the dropped enrgy and container
+
         const path1 = creep.pos.findPathTo(closestdroppedEnergy.pos)
         const path2 = creep.pos.findPathTo(closestContainer.pos)
 
-        if (path1.length > path2.length) {
+        // if the closest thing is dropped energy get that otherwise go to the containers
+
+        if (path1.length < path2.length) {
+
+            //  pick it up
+
             if (creep.pickup(closestdroppedEnergy) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(closestdroppedEnergy)
             }
         }
         else {
+
+            // get the energy
+
             if (creep.withdraw(closestContainer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(closestContainer)
             }

@@ -12,9 +12,12 @@ export var roleHauler = {
 
         if (creep.store.getFreeCapacity() > 0) {
 
+            // get energy
+
             generalFuncs.findEnergy(creep)
 
-        } else {
+        }
+        else {
 
             if (creep.room.memory.spawnContainerID != null) {
                 const upgraderContainer = Game.getObjectById(creep.room.memory.spawnContainerID)
@@ -92,7 +95,7 @@ export var roleHauler = {
                     }
                     return
                 }
-                
+
 
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 
