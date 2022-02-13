@@ -31,8 +31,6 @@ function Repair(damagedStructures: AnyStructure[], tower: StructureTower) {
 }
 
 function Attack(hostiles: Creep[], tower: StructureTower, room: Room) {
-    var username = hostiles[0].owner.username;
-    Game.notify(`User ${username} spotted in room ${room}, the name of the enemy creep is ${hostiles[0].name}`);
     tower.attack(hostiles[0]);
 
 }

@@ -30,7 +30,7 @@ export function roomFuctions()
 
     //how often FindEmptySites runs
 
-    const waitTime = 50
+    const waitTime = 25
 
     // If the remainder of dividing the current game time by some value is 0, then its been some amount of ticks
 
