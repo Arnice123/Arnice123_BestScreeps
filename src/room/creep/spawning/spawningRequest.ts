@@ -37,7 +37,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         SpawnInHauler(spawnEnergyAvailable)
     }
 
-    if (constructionSites != null && builders.length < 4) {
+    if (constructionSites != null && builders.length < 3) {
         SpawnInBuilder(spawnEnergyAvailable)
     }
 

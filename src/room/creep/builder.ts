@@ -24,11 +24,11 @@ export var roleBuilder = {
             creep.say('🚧 build')
         }
 
+         // all the construction sites
+
+         const constructionSite: ConstructionSite | null = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
+
         if (creep.memory.building) {
-
-            // all the construction sites
-
-            const constructionSite: ConstructionSite | null = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
 
             // if there are sites build them
 
@@ -44,7 +44,7 @@ export var roleBuilder = {
         else {
 
             // get energy
-            
+
             generalFuncs.findEnergy(creep)
         }
     }
