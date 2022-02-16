@@ -4,8 +4,9 @@ interface GeneralFuncs {
     findEnergy(creep: Creep): void
 }
 
-
 export const generalFuncs: Partial<GeneralFuncs> = {}
+
+
 
 // this function will find the closest energy in the area in either a container or dropped energy
 

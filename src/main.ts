@@ -5,12 +5,10 @@ import { roomFuctions } from "room/roomManager"
 
 
 declare global {
-    
+
     interface Memory {
         chosenBuildEnergy: Id<Resource<ResourceConstant>>
         chosenBuildContainer: Id<StructureContainer>
-
-
     }
 
     interface RoomMemory {
@@ -23,6 +21,9 @@ declare global {
         spawnContainerPosition: RoomPosition
 
         roomController: StructureController
+
+        NonWallPositions: RoomPosition[]
+        ExtensionPositions: RoomPosition[]
     }
 
     interface CreepMemory {
@@ -39,6 +40,13 @@ declare global {
         interface Global {
 
         }
+    }
+
+    interface Rectangle {
+        x1: number
+        y1: number
+        x2: number
+        y2: number
     }
 }
 

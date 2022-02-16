@@ -33,11 +33,11 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         SpawnInUpgrader(spawnEnergyAvailable)
     }
 
-    if (haulers.length < 4) {
+    if (haulers.length < 3) {
         SpawnInHauler(spawnEnergyAvailable)
     }
 
-    if (constructionSites != null && builders.length < 3) {
+    if (constructionSites != null && builders.length < 4) {
         SpawnInBuilder(spawnEnergyAvailable)
     }
 
@@ -210,8 +210,14 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
 
         let body: BodyPartConstant[] = [MOVE, CARRY, CARRY]
 
-        for (let i = 0; i < numberOfParts - 1; i++) {
-            body.push(CARRY);
+        while (numberOfParts > 0)
+        {
+            body.push(CARRY)
+            numberOfParts -= 1
+            body.push(CARRY)
+            numberOfParts -= 1
+            body.push(MOVE)
+            numberOfParts -= 1
         }
 
         var newName = 'Hauler(T' + (numberOfParts + 3) + ')' + Game.time
