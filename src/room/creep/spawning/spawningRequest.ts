@@ -29,21 +29,21 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         SpawnInHarvester(spawnEnergyAvailable)
     }
 
-    if (upgraders.length < 5) {
+    if (upgraders.length < 3) {
         SpawnInUpgrader(spawnEnergyAvailable)
     }
 
-    if (haulers.length < 3) {
+    if (haulers.length < 2) {
         SpawnInHauler(spawnEnergyAvailable)
     }
 
-    if (constructionSites != null && builders.length < 4) {
+    if (constructionSites != null && builders.length < 2) {
         SpawnInBuilder(spawnEnergyAvailable)
     }
-
+/*
     if (repairers.length < 2) {
         SpawnInRepairer(spawnEnergyAvailable)
-    }
+    }*/
 
 
     // function to spawn in harvesters

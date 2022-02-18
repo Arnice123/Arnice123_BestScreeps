@@ -3,6 +3,7 @@ This is the code for the hauler
 */
 
 import { generalFuncs } from "international/generalFuncs";
+import { roomFuctions } from "room/roomManager";
 
 export var roleHauler = {
 
@@ -67,6 +68,18 @@ export var roleHauler = {
 
             }
             else{
+                if (creep.room.energyAvailable >= 600 && creep.room.storage != null)
+                {
+                    const target = creep.room.storage
+                    if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+
+                        // Move to it
+
+                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffaa00' } });
+                    }
+                    return
+                }
+
                 var targets = creep.room.find(FIND_MY_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&

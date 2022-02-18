@@ -137,39 +137,8 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         }
     }
-    else
+    else if (storage.store.getUsedCapacity(RESOURCE_ENERGY) == 0 && storage != null)
     {
-        if (droppedEnergy.length == 0 && containers.length == 0 && storage.store.getUsedCapacity(RESOURCE_ENERGY) == 0) {
-
-            // checking to see if there are any harvesters so if there is one then you can expect energy soon
-
-            for (var name in Game.creeps) {
-
-                var creep = Game.creeps[name];
-
-                // return if there are harvesters
-
-                if (creep.memory.role == 'harvester') {
-                    return
-                }
-            }
-
-            // sources in the room
-
-            var sources = creep.room.find(FIND_SOURCES)
-
-            // closest source
-
-            const closestSource = creep.pos.findClosestByRange(sources)
-
-            // harvest it
-
-            if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
-            {
-                creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
-            }
-
-        }
 
         // closest energy in the area
 
