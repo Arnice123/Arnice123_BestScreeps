@@ -58,7 +58,7 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
 
         // if this is the end of the path place a container
 
-        if (i == path1.length -1) {
+        if (i == path1.length) {
 
             // place container one the position
 
@@ -99,7 +99,7 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
 
         i++
 
-        if (i == path2.length - 1) {
+        if (i == path2.length) {
 
             const placeConstructionSiteResult20 = room.createConstructionSite(path2[position].x, path2[position].y, STRUCTURE_CONTAINER)
 

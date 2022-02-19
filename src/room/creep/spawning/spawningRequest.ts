@@ -23,27 +23,194 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
         tier: number
     }
 
-    // if the amount of creeps for each role is less than 2 spawn in a new one
+    const rcl = room.controller.level
+    if (rcl !== null)
+    {
+        switch (rcl)
+        {
+            case 1:
+                if (harvesters.length < 2) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
 
-    if (harvesters.length < 2) {
-        SpawnInHarvester(spawnEnergyAvailable)
-    }
+                if (upgraders.length < 2) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
 
-    if (upgraders.length < 3) {
-        SpawnInUpgrader(spawnEnergyAvailable)
-    }
+                if (haulers.length < 2) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+                break
+            case 2:
+                if (harvesters.length < 3) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
 
-    if (haulers.length < 2) {
-        SpawnInHauler(spawnEnergyAvailable)
-    }
+                if (upgraders.length < 3) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
 
-    if (constructionSites != null && builders.length < 2) {
-        SpawnInBuilder(spawnEnergyAvailable)
+                if (haulers.length < 2) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+
+                if (constructionSites != null && builders.length < 3) {
+                    SpawnInBuilder(spawnEnergyAvailable)
+                }
+
+                if (repairers.length < 3) {
+                    SpawnInRepairer(spawnEnergyAvailable)
+                }
+                break
+            case 3:
+                if (harvesters.length < 3) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
+
+                if (upgraders.length < 4) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
+
+                if (haulers.length < 3) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+
+                if (constructionSites != null && builders.length < 4) {
+                    SpawnInBuilder(spawnEnergyAvailable)
+                }
+
+                if (repairers.length < 2) {
+                    SpawnInRepairer(spawnEnergyAvailable)
+                }
+                break
+            case 4:
+                if (harvesters.length < 4) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
+
+                if (upgraders.length < 4) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
+
+                if (haulers.length < 4) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+
+                if (constructionSites != null && builders.length < 4) {
+                    SpawnInBuilder(spawnEnergyAvailable)
+                }
+
+                if (repairers.length < 2) {
+                    SpawnInRepairer(spawnEnergyAvailable)
+                }
+                break
+            case 5:
+                if (harvesters.length < 4) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
+
+                if (upgraders.length < 4) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
+
+                if (haulers.length < 4) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+
+                if (constructionSites != null && builders.length < 4) {
+                    SpawnInBuilder(spawnEnergyAvailable)
+                }
+
+                if (repairers.length < 2) {
+                    SpawnInRepairer(spawnEnergyAvailable)
+                }
+                break
+            case 6:
+                if (harvesters.length < 4) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
+
+                if (upgraders.length < 4) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
+
+                if (haulers.length < 4) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+
+                if (constructionSites != null && builders.length < 4) {
+                    SpawnInBuilder(spawnEnergyAvailable)
+                }
+
+                if (repairers.length < 2) {
+                    SpawnInRepairer(spawnEnergyAvailable)
+                }
+                break
+            case 7:
+                if (harvesters.length < 4) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
+
+                if (upgraders.length < 4) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
+
+                if (haulers.length < 4) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+
+                if (constructionSites != null && builders.length < 4) {
+                    SpawnInBuilder(spawnEnergyAvailable)
+                }
+
+                if (repairers.length < 2) {
+                    SpawnInRepairer(spawnEnergyAvailable)
+                }
+                break
+            case 8:
+                if (harvesters.length < 4) {
+                    SpawnInHarvester(spawnEnergyAvailable)
+                }
+
+                if (upgraders.length < 4) {
+                    SpawnInUpgrader(spawnEnergyAvailable)
+                }
+
+                if (haulers.length < 4) {
+                    SpawnInHauler(spawnEnergyAvailable)
+                }
+
+                if (constructionSites != null && builders.length < 4) {
+                    SpawnInBuilder(spawnEnergyAvailable)
+                }
+
+                if (repairers.length < 2) {
+                    SpawnInRepairer(spawnEnergyAvailable)
+                }
+                break
+        }
     }
-/*
-    if (repairers.length < 2) {
-        SpawnInRepairer(spawnEnergyAvailable)
-    }*/
+    else{
+        if (harvesters.length < 2) {
+            SpawnInHarvester(spawnEnergyAvailable)
+        }
+
+        if (upgraders.length < 3) {
+            SpawnInUpgrader(spawnEnergyAvailable)
+        }
+
+        if (haulers.length < 2) {
+            SpawnInHauler(spawnEnergyAvailable)
+        }
+
+        if (constructionSites != null && builders.length < 2) {
+            SpawnInBuilder(spawnEnergyAvailable)
+        }
+
+        if (repairers.length < 2) {
+            SpawnInRepairer(spawnEnergyAvailable)
+        }
+    }
 
 
     // function to spawn in harvesters
@@ -239,7 +406,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
             tier: 0
         }
 
-        var energytogive = energy - 400
+        var energytogive = energy - 350
 
         while (energytogive > 49) {
             if (energytogive >= 100) {

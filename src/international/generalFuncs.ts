@@ -49,7 +49,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
             // sources in the room
 
-            var sources = creep.room.find(FIND_SOURCES)
+            var sources = creep.room.find(FIND_SOURCES_ACTIVE)
 
             // closest source
 
