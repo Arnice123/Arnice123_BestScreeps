@@ -32,13 +32,16 @@ export var roleBuilder = {
 
             // if there are sites build them
 
-            if (constructionSite != null) {
+            if (constructionSite !== null) {
 
                 // build
 
                 if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(constructionSite, { visualizePathStyle: { stroke: '#ffffff' } })
                 }
+            }
+            else{
+                generalFuncs.repairStructures(creep)
             }
         }
         else {

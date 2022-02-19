@@ -2,6 +2,7 @@
 
 interface GeneralFuncs {
     findEnergy(creep: Creep): void
+    repairStructures(creep: Creep): void
 }
 
 export const generalFuncs: Partial<GeneralFuncs> = {}
@@ -21,7 +22,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
     // getting the containers in the room
 
     var containers = creep.room.find(FIND_STRUCTURES, {
-        filter: (structure) => { return structure.structureType == STRUCTURE_CONTAINER && structure.id != creep.room.memory.spawnContainerID && structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0}
+        filter: (structure) => { return structure.structureType == STRUCTURE_CONTAINER && structure.id !== creep.room.memory.spawnContainerID && structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0}
     })
 
     // getting a possible storage
@@ -30,7 +31,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
     // if there isn't any energy harvest it
 
-    if (storage == null)
+    if (storage === null)
     {
         if (droppedEnergy.length == 0 && containers.length == 0) {
 
@@ -74,7 +75,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there is a container take energy from it
 
-        if (closestContainer != null)
+        if (closestContainer !== null)
         {
 
             // take the energy
@@ -92,7 +93,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there isn't a container take from this
 
-        if (closestdroppedEnergy != null)
+        if (closestdroppedEnergy !== null)
         {
 
             // pick up the energy
@@ -108,7 +109,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there are both containers and energy get closet
 
-        if (closestContainer != null && closestdroppedEnergy != null)
+        if (closestContainer !== null && closestdroppedEnergy !== null)
         {
 
             // create a path to the dropped enrgy and container
@@ -136,11 +137,12 @@ generalFuncs.findEnergy = function findEnergy(creep) {
             }
 
         }
-    }
-    else if (storage.store.getUsedCapacity(RESOURCE_ENERGY) == 0 && storage != null)
+    }/*
+    else if (storage !== undefined)
     {
-
-        // closest energy in the area
+        if (storage.store.getUsedCapacity(RESOURCE_ENERGY) > 0)
+        {
+            // closest energy in the area
 
         const closestdroppedEnergy = creep.pos.findClosestByRange(droppedEnergy)
 
@@ -150,7 +152,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there is a container take energy from it
 
-        if (closestContainer != null)
+        if (closestContainer !== null)
         {
 
             // take the energy
@@ -168,7 +170,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there isn't a container take from this
 
-        if (closestdroppedEnergy != null)
+        if (closestdroppedEnergy !== null)
         {
 
             // pick up the energy
@@ -194,7 +196,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there are both containers and energy get closet
 
-        if (closestContainer != null && closestdroppedEnergy != null)
+        if (closestContainer !== null && closestdroppedEnergy !== null)
         {
 
             // create a path to the dropped enrgy and container
@@ -220,12 +222,70 @@ generalFuncs.findEnergy = function findEnergy(creep) {
                     creep.moveTo(closestContainer)
                 }
             }
-
         }
+        }
+    }*/
+
+
+}
+
+generalFuncs.repairStructures = function repaierStructures(creep) {
+    // find closest damaged structure
+
+    const damagedRamparts = creep.room.find(FIND_STRUCTURES, {
+        filter: (structure) => (structure.hits < 75000 && structure.structureType == STRUCTURE_RAMPART)
+    })
+
+    const damagedWalls = creep.room.find(FIND_STRUCTURES, {
+        filter: (structure) => (structure.hits < 10000 && structure.structureType == STRUCTURE_WALL)
+    })
+
+    if (damagedRamparts !== null) {
+        const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
+
+        if (closestDamagedStructure) {
+            if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(closestDamagedStructure, { reusePath: 50 })
+            }
+        }
+        return
     }
 
+    if (damagedWalls !== null && damagedRamparts !== null) {
+        const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
 
+        if (closestDamagedStructure) {
+            if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(closestDamagedStructure, { reusePath: 50 })
+            }
+        }
+        return
+    }
 
+    if(damagedWalls !== null ) {
+        const closestDamagedStructure = creep.pos.findClosestByRange(damagedWalls)
 
+        if (closestDamagedStructure) {
+            if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(closestDamagedStructure, { reusePath: 50 })
+            }
+        }
+        return
+    }
 
+    if (damagedWalls === null && damagedRamparts === null)
+    {
+        const constructionSite: ConstructionSite | null = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
+
+        if (constructionSite !== null) {
+            if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(constructionSite, { visualizePathStyle: { stroke: '#ffffff' } })
+            }
+        }
+        else{
+            if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
+            }
+        }
+    }
 }
