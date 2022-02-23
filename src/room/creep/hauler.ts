@@ -20,7 +20,7 @@ export var roleHauler = {
         }
         else {
 
-            if (creep.room.memory.spawnContainerID != null) {
+            if (creep.room.memory.spawnContainerID) {
                 const upgraderContainer = Game.getObjectById(creep.room.memory.spawnContainerID)
 
                 if (upgraderContainer.store.getUsedCapacity() <= 150) {
@@ -51,7 +51,7 @@ export var roleHauler = {
                         }
                     }
 
-                    if (lowEnergyTowers != null) {
+                    if (lowEnergyTowers) {
                         if (creep.transfer(lowEnergyTowers, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(lowEnergyTowers, { visualizePathStyle: { stroke: '#ffaa00' } });
                         }
@@ -68,7 +68,7 @@ export var roleHauler = {
 
             }
             else{
-                if (creep.room.energyAvailable >= 600 && creep.room.storage != null)
+                if (creep.room.energyAvailable >= 600 && creep.room.storage)
                 {
                     const target = creep.room.storage
                     if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -79,13 +79,6 @@ export var roleHauler = {
                     }
                     return
                 }
-
-                var targets = creep.room.find(FIND_MY_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
-                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                    }
-                });
 
                 const towers: StructureTower[] = creep.room.find(FIND_MY_STRUCTURES, {
                     filter: (structure) => {
@@ -102,13 +95,19 @@ export var roleHauler = {
                     }
                 }
 
-                if (lowEnergyTowers != null) {
+                if (lowEnergyTowers) {
                     if (creep.transfer(lowEnergyTowers, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(lowEnergyTowers, { visualizePathStyle: { stroke: '#ffaa00' } });
                     }
                     return
                 }
 
+                var targets = creep.room.find(FIND_MY_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
+                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                })
 
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 

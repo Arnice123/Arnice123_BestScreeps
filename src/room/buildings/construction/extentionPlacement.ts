@@ -5,7 +5,7 @@
 
 export function ExtensionPlace(room: Room, spawn: StructureSpawn)
 {
-    const rect : Rectangle = {
+    const rect : Rectangle = { /* CHECK CONTAINER MANAGER FOR HOW TO USE (PUT AROUND THE POS*/
         x1: -25,
         y1: -25,
         x2: 25,
@@ -15,7 +15,7 @@ export function ExtensionPlace(room: Room, spawn: StructureSpawn)
     findPositionsInsideRect(rect)
 
     const possibleExtensionPlacement = room.memory.NonWallPositions
-    
+
 
 
     function findPositionsInsideRect(rect: Rectangle) {

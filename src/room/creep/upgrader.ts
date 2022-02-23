@@ -4,9 +4,6 @@ export var roleUpgrader = {
 
 
     run: function (creep: Creep) {
-        const myHardcodedRoomName = "E29N11";
-        const room = Game.rooms[myHardcodedRoomName]
-
 
 
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
@@ -19,10 +16,7 @@ export var roleUpgrader = {
         }
 
         if (creep.memory.upgrading) {
-            if (creep.room.controller == null) return
-            if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
-            }
+            generalFuncs.upgradeController(creep)
         }
         else {
             generalFuncs.findEnergy(creep)

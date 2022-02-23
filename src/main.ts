@@ -24,6 +24,9 @@ declare global {
 
         NonWallPositions: RoomPosition[]
         ExtensionPositions: RoomPosition[]
+
+        HarvesterPos1: RoomPosition[]
+        HarvesterPos2: RoomPosition[]
     }
 
     interface CreepMemory {

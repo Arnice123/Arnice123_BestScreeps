@@ -20,7 +20,7 @@ export var roleHarvester = {
         // harvest it
 
         if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
-        creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
+            creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
     }
 };
 

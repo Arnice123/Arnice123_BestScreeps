@@ -17,13 +17,13 @@ export function TowerStuff(room: Room, tower: StructureTower) {
     if (hostiles.length > 0) {
 
         Attack(hostiles, tower)
-
+        return
     }
 
     // all damaged structures minus ramparts and walls
 
     const damagedStructures = room.find(FIND_STRUCTURES, {
-        filter: (structure) => structure.hits < structure.hitsMax * 0.8 && structure.structureType != STRUCTURE_RAMPART && structure.structureType != STRUCTURE_WALL
+        filter: (structure) => structure.hits < structure.hitsMax * 0.5 && structure.structureType != STRUCTURE_RAMPART && structure.structureType != STRUCTURE_WALL
     })
 
     // if there are damaged structues heal them

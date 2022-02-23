@@ -9,8 +9,8 @@ export function CheckIfContainerIsNeeded(room: Room): boolean {
     // place a container if there isn't a spawn container in memory
 
     const spawnContainer = Game.getObjectById(room.memory.spawnContainerID)
-    
-    if (spawnContainer == null) {
+
+    if (!spawnContainer) {
         return true
     }
 

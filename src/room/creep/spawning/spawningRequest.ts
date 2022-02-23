@@ -24,7 +24,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
     }
 
     const rcl = room.controller.level
-    if (rcl !== null)
+    if (rcl  )
     {
         switch (rcl)
         {
@@ -42,7 +42,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                 }
                 break
             case 2:
-                if (harvesters.length < 3) {
+                if (harvesters.length < 4) {
                     SpawnInHarvester(spawnEnergyAvailable)
                 }
 
@@ -54,7 +54,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                     SpawnInHauler(spawnEnergyAvailable)
                 }
 
-                if (constructionSites !== null && builders.length < 3) {
+                if (constructionSites && builders.length < 3) {
                     SpawnInBuilder(spawnEnergyAvailable)
                 }
 
@@ -63,11 +63,11 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                 }
                 break
             case 3:
-                if (harvesters.length < 3) {
+                if (harvesters.length < 4) {
                     SpawnInHarvester(spawnEnergyAvailable)
                 }
 
-                if (upgraders.length < 4) {
+                if (upgraders.length < 3) {
                     SpawnInUpgrader(spawnEnergyAvailable)
                 }
 
@@ -75,7 +75,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                     SpawnInHauler(spawnEnergyAvailable)
                 }
 
-                if (constructionSites !== null && builders.length < 4) {
+                if (constructionSites && builders.length < 3) {
                     SpawnInBuilder(spawnEnergyAvailable)
                 }
 
@@ -96,7 +96,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                     SpawnInHauler(spawnEnergyAvailable)
                 }
 
-                if (constructionSites !== null && builders.length < 4) {
+                if (constructionSites && builders.length < 4) {
                     SpawnInBuilder(spawnEnergyAvailable)
                 }
 
@@ -117,7 +117,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                     SpawnInHauler(spawnEnergyAvailable)
                 }
 
-                if (constructionSites !== null && builders.length < 4) {
+                if (constructionSites && builders.length < 4) {
                     SpawnInBuilder(spawnEnergyAvailable)
                 }
 
@@ -138,7 +138,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                     SpawnInHauler(spawnEnergyAvailable)
                 }
 
-                if (constructionSites !== null && builders.length < 4) {
+                if (constructionSites && builders.length < 4) {
                     SpawnInBuilder(spawnEnergyAvailable)
                 }
 
@@ -159,7 +159,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                     SpawnInHauler(spawnEnergyAvailable)
                 }
 
-                if (constructionSites !== null && builders.length < 4) {
+                if (constructionSites && builders.length < 4) {
                     SpawnInBuilder(spawnEnergyAvailable)
                 }
 
@@ -180,7 +180,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                     SpawnInHauler(spawnEnergyAvailable)
                 }
 
-                if (constructionSites !== null && builders.length < 4) {
+                if (constructionSites && builders.length < 4) {
                     SpawnInBuilder(spawnEnergyAvailable)
                 }
 
@@ -203,7 +203,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
             SpawnInHauler(spawnEnergyAvailable)
         }
 
-        if (constructionSites !== null && builders.length < 2) {
+        if (constructionSites && builders.length < 2) {
             SpawnInBuilder(spawnEnergyAvailable)
         }
 

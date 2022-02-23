@@ -69,7 +69,7 @@ export function PlaceContainersByController(controller: StructureController, roo
 
             // if this is the first iteration automatically make it the chosen one
 
-            if (shortestpath == undefined)
+            if (!shortestpath)
             {
                 shortestpath = tempPath
                 chosenPosition = tempPos

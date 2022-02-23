@@ -11,7 +11,7 @@ export function FindEmptySites(room: Room, spawn: StructureSpawn) {
 
     // if there isn't a path to the sources make one
 
-    if (room.memory.path1 == null && room.memory.path2 == null) {
+    if (!room.memory.path1&& !room.memory.path2) {
 
         // new path
 

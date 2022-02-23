@@ -1,8 +1,10 @@
+import { range } from "lodash"
 
 
 interface GeneralFuncs {
     findEnergy(creep: Creep): void
     repairStructures(creep: Creep): void
+    upgradeController(creep: Creep): void
 }
 
 export const generalFuncs: Partial<GeneralFuncs> = {}
@@ -27,11 +29,11 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
     // getting a possible storage
 
-    const storage: StructureStorage | null = creep.room.storage
+    const storage: StructureStorage | undefined = creep.room.storage
 
     // if there isn't any energy harvest it
 
-    if (storage === null)
+    if (!storage)
     {
         if (droppedEnergy.length == 0 && containers.length == 0) {
 
@@ -60,7 +62,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
             if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
             {
-                creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
+                creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' }})
             }
 
         }
@@ -75,7 +77,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there is a container take energy from it
 
-        if (closestContainer !== null)
+        if (closestContainer)
         {
 
             // take the energy
@@ -93,7 +95,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there isn't a container take from this
 
-        if (closestdroppedEnergy !== null)
+        if (closestdroppedEnergy)
         {
 
             // pick up the energy
@@ -109,7 +111,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there are both containers and energy get closet
 
-        if (closestContainer !== null && closestdroppedEnergy !== null)
+        if (closestContainer && closestdroppedEnergy)
         {
 
             // create a path to the dropped enrgy and container
@@ -137,8 +139,8 @@ generalFuncs.findEnergy = function findEnergy(creep) {
             }
 
         }
-    }/*
-    else if (storage !== undefined)
+    }
+    else if (storage)
     {
         if (storage.store.getUsedCapacity(RESOURCE_ENERGY) > 0)
         {
@@ -152,7 +154,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there is a container take energy from it
 
-        if (closestContainer !== null)
+        if (closestContainer)
         {
 
             // take the energy
@@ -170,7 +172,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there isn't a container take from this
 
-        if (closestdroppedEnergy !== null)
+        if (closestdroppedEnergy)
         {
 
             // pick up the energy
@@ -196,7 +198,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
 
         // if there are both containers and energy get closet
 
-        if (closestContainer !== null && closestdroppedEnergy !== null)
+        if (closestContainer && closestdroppedEnergy)
         {
 
             // create a path to the dropped enrgy and container
@@ -224,7 +226,7 @@ generalFuncs.findEnergy = function findEnergy(creep) {
             }
         }
         }
-    }*/
+    }
 
 
 }
@@ -237,55 +239,60 @@ generalFuncs.repairStructures = function repaierStructures(creep) {
     })
 
     const damagedWalls = creep.room.find(FIND_STRUCTURES, {
-        filter: (structure) => (structure.hits < 10000 && structure.structureType == STRUCTURE_WALL)
+        filter: (structure) => (structure.hits < 50000 && structure.structureType == STRUCTURE_WALL)
     })
 
-    if (damagedRamparts !== null) {
+    if (damagedRamparts) {
         const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
 
         if (closestDamagedStructure) {
             if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestDamagedStructure, { reusePath: 50 })
+                creep.moveTo(closestDamagedStructure)
             }
         }
         return
     }
 
-    if (damagedWalls !== null && damagedRamparts !== null) {
-        const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
-
-        if (closestDamagedStructure) {
-            if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestDamagedStructure, { reusePath: 50 })
-            }
-        }
-        return
-    }
-
-    if(damagedWalls !== null ) {
+    if(damagedWalls) {
         const closestDamagedStructure = creep.pos.findClosestByRange(damagedWalls)
 
-        if (closestDamagedStructure) {
             if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestDamagedStructure, { reusePath: 50 })
+                creep.moveTo(closestDamagedStructure)
             }
-        }
+
         return
     }
 
-    if (damagedWalls === null && damagedRamparts === null)
-    {
-        const constructionSite: ConstructionSite | null = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
+    if (damagedWalls && damagedRamparts) {
+        const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
 
-        if (constructionSite !== null) {
+            if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(closestDamagedStructure)
+            }
+
+        return
+    }
+
+    if (!damagedWalls && !damagedRamparts)
+    {
+        const constructionSite: ConstructionSite | undefined = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
+
+        if (constructionSite) {
             if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(constructionSite, { visualizePathStyle: { stroke: '#ffffff' } })
             }
         }
         else{
-            if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
-            }
+            generalFuncs.upgradeController(creep)
         }
+    }
+}
+
+generalFuncs.upgradeController = function upgradeController(creep)
+{
+    if (!creep.room.controller) return
+
+    if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
     }
 }

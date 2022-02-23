@@ -18,11 +18,11 @@ interface Position {
 
 export function CheckIfContainerIsNeeded(room: Room, controller: StructureController, spawn: StructureSpawn): boolean {
 
-    var rect : Rectanngle = {
-        x1: 2,
-        y1: 2,
-        x2: -2,
-        y2: -2,
+    const rect: Rectanngle = {
+        x1: controller.pos.x - 2,
+        y1: controller.pos.y - 2,
+        x2: controller.pos.x + 2,
+        y2: controller.pos.y + 2
     }
 
     const containerPos = findBestSpot()
@@ -71,7 +71,7 @@ export function CheckIfContainerIsNeeded(room: Room, controller: StructureContro
 
             // if this is the first iteration automatically make it the chosen one
 
-            if (shortestpath == undefined)
+            if (!shortestpath)
             {
                 shortestpath = tempPath
                 chosenPosition = tempPos
