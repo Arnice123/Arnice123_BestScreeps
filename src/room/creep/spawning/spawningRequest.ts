@@ -24,7 +24,7 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
     }
 
     const rcl = room.controller.level
-    if (rcl  )
+    if (rcl)
     {
         switch (rcl)
         {
@@ -63,11 +63,11 @@ export function SpawnInCreep(room: Room, spawn: StructureSpawn) {
                 }
                 break
             case 3:
-                if (harvesters.length < 4) {
+                if (harvesters.length < 3) {
                     SpawnInHarvester(spawnEnergyAvailable)
                 }
 
-                if (upgraders.length < 3) {
+                if (upgraders.length < 4) {
                     SpawnInUpgrader(spawnEnergyAvailable)
                 }
 

@@ -242,7 +242,7 @@ generalFuncs.repairStructures = function repaierStructures(creep) {
         filter: (structure) => (structure.hits < 50000 && structure.structureType == STRUCTURE_WALL)
     })
 
-    if (damagedRamparts) {
+    if (damagedRamparts.length) {
         const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
 
         if (closestDamagedStructure) {
@@ -253,17 +253,17 @@ generalFuncs.repairStructures = function repaierStructures(creep) {
         return
     }
 
-    if(damagedWalls) {
+    if(damagedWalls.length) {
         const closestDamagedStructure = creep.pos.findClosestByRange(damagedWalls)
 
-            if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(closestDamagedStructure)
-            }
+        if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(closestDamagedStructure)
+        }
 
         return
     }
 
-    if (damagedWalls && damagedRamparts) {
+    if (damagedWalls.length && damagedRamparts.length) {
         const closestDamagedStructure = creep.pos.findClosestByRange(damagedRamparts)
 
             if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
@@ -273,7 +273,7 @@ generalFuncs.repairStructures = function repaierStructures(creep) {
         return
     }
 
-    if (!damagedWalls && !damagedRamparts)
+    if (!damagedWalls.length && !damagedRamparts.length)
     {
         const constructionSite: ConstructionSite | undefined = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES)
 

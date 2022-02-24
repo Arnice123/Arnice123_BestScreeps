@@ -9,18 +9,35 @@ export var roleHarvester = {
 
     run: function (creep: Creep) {
 
-        // sources in the room
+        if (!creep.room.memory.HarvesterPos1 && !creep.room.memory.HarvesterPos2)
+        {
+            // sources in the room
 
-        var sources = creep.room.find(FIND_SOURCES_ACTIVE)
+            var sources = creep.room.find(FIND_SOURCES_ACTIVE)
 
-        //closest one
+            //closest one
 
-        const closestSource = creep.pos.findClosestByRange(sources)
+            const closestSource = creep.pos.findClosestByRange(sources)
 
-        // harvest it
+            // harvest it
 
-        if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
-            creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
+            if (creep.harvest(closestSource) == ERR_NOT_IN_RANGE)
+            {
+                creep.moveTo(closestSource, { visualizePathStyle: { stroke: '#ffaa00' } })
+            }
+
+            return
+        }
+
+        if (creep.memory.assignedHarvestingPos)
+        {
+            if (creep.harvest(creep.memory.assignedSource) == ERR_NOT_IN_RANGE)
+            {
+                creep.moveTo(creep.memory.assignedHarvestingPos)
+            }
+
+            return
+        }
     }
 };
 

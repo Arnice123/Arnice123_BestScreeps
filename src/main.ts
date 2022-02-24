@@ -27,15 +27,21 @@ declare global {
 
         HarvesterPos1: RoomPosition[]
         HarvesterPos2: RoomPosition[]
+
+        HARVESTER_MAX: number
     }
 
     interface CreepMemory {
         role: string
+
         building?: boolean
         hauling?: boolean
         repairing?: boolean
         upgrading?: boolean
         harvesting?: boolean
+
+        assignedHarvestingPos?: RoomPosition
+        assignedSource?: Source
     }
 
     // Syntax for adding proprties to `global` (ex "global.log")

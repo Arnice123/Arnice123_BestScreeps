@@ -42,6 +42,7 @@ export function FindMaxHarv(room: Room)
                 {
                     const tempPos: RoomPosition = new RoomPosition(x, y, room.name)
                     availiblePositions.push(tempPos)
+                    room.memory.HARVESTER_MAX += 1
                 }
             }
         }
